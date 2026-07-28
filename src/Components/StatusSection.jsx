@@ -3,18 +3,18 @@ import { Package, TrendingUp, Star, Tag } from 'lucide-react';
 import { MyStore } from '../context/MyWebsite';
 
 const StatsSection = () => {
-  let { Products} = useContext(MyStore)
+  let { Products  , currentUser} = useContext(MyStore)
   return (
     <div className="w-full bg-[#0a0a0a] p-6 flex justify-center items-center">
       <div className="max-w-[1200px] w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        
+
         <div className="bg-[#121212] border border-white rounded-2xl p-5 flex items-center gap-4">
           <div className="bg-[#1a1c13] p-3 rounded-xl flex items-center justify-center text-[#d1f73d]">
             <Package className="w-6 h-6" strokeWidth={2} />
           </div>
           <div className="flex flex-col">
             <span className="text-white text-2xl font-bold tracking-tight custom-wide-font">
-              0
+              {currentUser.shopping.length}
             </span>
             <span className="text-zinc-400 text-sm mt-0.5">
               Cart Items
@@ -31,7 +31,9 @@ const StatsSection = () => {
           </div>
           <div className="flex flex-col">
             <span className="text-white text-2xl font-bold tracking-tight custom-wide-font">
-              $0.00
+              ${currentUser.shopping.reduce((acc, val) => {
+                return acc + val.price * val.qty
+              }, 0)}
             </span>
             <span className="text-zinc-400 text-sm mt-0.5">
               Cart Value
@@ -48,7 +50,7 @@ const StatsSection = () => {
           </div>
           <div className="flex flex-col">
             <span className="text-white text-2xl font-bold tracking-tight custom-wide-font">
-              {Products.filter((pro)=> pro.rating >= 4.8).length}
+              {Products.filter((pro) => pro.rating >= 4.8).length}
             </span>
             <span className="text-zinc-400 text-sm mt-0.5">
               Top Products
