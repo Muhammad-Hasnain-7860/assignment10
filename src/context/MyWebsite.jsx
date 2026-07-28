@@ -76,7 +76,7 @@ export const ContextProvider = ({ children }) => {
         } else {
             currentUser.shopping.splice(foundIdx, 1)
 
-            let obj = {...currentUser}
+            let obj = { ...currentUser }
 
             let updatedUser = users.map((user) => {
                 return user.email === currentUser.email ? obj : user
@@ -93,11 +93,34 @@ export const ContextProvider = ({ children }) => {
 
     }
 
+    const deleteProduct = (id) => {
+        let found = currentUser.shopping.find((s) => {
+            return s.id === id
+        })
+
+        let foundIdx = currentUser.shopping.find((s) => {
+            return s.id === id
+        })
+
+        currentUser.shopping.splice(foundIdx, 1)
+
+        let obj = { ...currentUser }
+
+        let updatedUser = users.map((user) => {
+            return user.email === currentUser.email ? obj : user
+        })
+
+        setCurrentUser(obj)
+        setUsers(updatedUser)
+        localStorage.setItem('users', JSON.stringify(updatedUser))
+        localStorage.setItem('current', JSON.stringify(obj))
+    }
+
     useEffect(() => {
         setCurrentUser(JSON.parse(localStorage.getItem('current')))
         setUsers(JSON.parse(localStorage.getItem('users')) || [])
         getProductData()
     }, [])
 
-    return <MyStore.Provider value={{ updateProduct, shopping, setShopping, currentCat, setCurrentCat, topRated, setTopRated, categoryProduct, setCategoryProduct, users, setUsers, currentUser, setCurrentUser, Products, setProducts, showCart, setShowCart , decrementProducts }}>{children}</MyStore.Provider>
+    return <MyStore.Provider value={{ updateProduct, shopping, setShopping, currentCat, setCurrentCat, topRated, setTopRated, categoryProduct, setCategoryProduct, users, setUsers, currentUser, setCurrentUser, Products, setProducts, showCart, setShowCart, decrementProducts , deleteProduct }}>{children}</MyStore.Provider>
 }

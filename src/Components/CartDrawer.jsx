@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import { MyStore } from '../context/MyWebsite';
 
 const CartDrawer = () => {
-    let { currentUser, setCurrentUser ,showCart , setShowCart , updateProduct , decrementProducts} = useContext(MyStore)
+    let { currentUser, setCurrentUser ,showCart , setShowCart , updateProduct , decrementProducts , deleteProduct} = useContext(MyStore)
     let navigate = useNavigate()
 
     return (
@@ -63,7 +63,7 @@ const CartDrawer = () => {
                                     </button>
                                 </div>
 
-                                <button className="text-zinc-600 hover:text-red-500 transition-colors">
+                                <button onClick={()=>{deleteProduct(cart.id)}} className="text-zinc-600 hover:text-red-500 transition-colors">
                                     <Trash2 className="w-4 h-4" strokeWidth={2} />
                                 </button>
                             </div>
