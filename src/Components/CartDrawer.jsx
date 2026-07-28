@@ -78,7 +78,9 @@ const CartDrawer = () => {
                 <div className="flex items-center justify-between">
                     <span className="text-zinc-500 text-sm">Total</span>
                     <span className="text-white text-2xl font-black tracking-tight custom-wide-font">
-                        $149.99
+                        ${currentUser.shopping.reduce((acc,val)=>{
+                            return acc + val.price * val.qty
+                        },0)}
                     </span>
                 </div>
 
