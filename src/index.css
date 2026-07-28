@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+
+@font-face {
+  font-family: 'SkyMartFont';
+  src: url('/src/assets/Fonts/NeueMachina-Light.otf') format('opentype');
+}
+
+.custom-wide-font {
+  font-family: 'SkyMartFont', sans-serif !important;
+}
+
+.custom-wide-font::placeholder {
+  font-family: 'SkyMartFont', sans-serif !important;
+}
